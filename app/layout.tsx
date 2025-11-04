@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AppShell, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chat.vercel.ai"),
@@ -78,8 +81,11 @@ export default function RootLayout({
           disableTransitionOnChange
           enableSystem
         >
-          <Toaster position="top-center" />
-          <SessionProvider>{children}</SessionProvider>
+          <MantineProvider>
+            <Header />
+            <Toaster position="top-center" />
+            <SessionProvider>{children}</SessionProvider>
+          </MantineProvider>
         </ThemeProvider>
       </body>
     </html>
